@@ -113,9 +113,25 @@ class LocalBd:
 
 
 
-    def appendTagToList(self, tag, tagsDict = {}):
-        tagsDict["Tags"].append(tag)
-        return tagsDict
+    def appendTagToList(self, tag, tagsDict):
+        list = tagsDict["Tags"].split(",")
+        list.append(tag)
+        print(list)
+        str = ','.join(list)
+        return str
+
+
+    def deleteTagByMediaName(self,tag,mediaName):
+        tagsDict = self.getTagsByMediaName(mediaName)
+        list = tagsDict["Tags"].split(",")
+        try:
+            list.remove(tag)
+
+        except Exception as ex:
+            print('Not such tag')
+        str = ','.join(list)
+        print(str)
+        self.pasteTagsByMediaName(str,mediaName)
 
 
     def pasteTagsByMediaName(self,tags,mediaName):
@@ -135,11 +151,11 @@ class LocalBd:
 
 
 
-
+listt = "['Рома','Любовь']"
 Worker = LocalBd()
-work = Worker.getTagsByMediaName('Аываывац')
-print(work)
-Worker.addNewTagToTagsOfMedia('киса','Аываывац')
+
+Worker.addNewTagToTagsOfMedia("кот",'asdawq.jpg')
+Worker.deleteTagByMediaName("шпрот",'asdawq.jpg')
 #Worker.dropTable()
 #Worker.createNewTable()
 
