@@ -26,9 +26,12 @@ class LocalBd:
         except sqlite3 as ex:
             print(ex)
 
-    def createNewTable(self,connection):
+    def createNewTable(self):
+        connection = self.createMySqlConnection()
         cursor = self.CreateCursorFromConnection(connection)
         cursor.execute('''CREATE TABLE sorted_media_with_tags(mediaUrl TEXT NOT NULL, mediaType TEXT NOT NULL, Tags TEXT NOT NULL)''')
+        cursor.close()
+        self.CloseConnection(connection)
 
 
 
@@ -40,7 +43,15 @@ class LocalBd:
         print("Версия базы данных SQLite: ", record)
 
 
+    def CloseConnection(self,connection):
+        connection.close()
+        print("Соединенее закрыто")
+#class ListWorker:
+
+
+
 
 
 Worker = LocalBd()
-connection = Worker.createMySqlConnection()
+Worker.createNewTable()
+
