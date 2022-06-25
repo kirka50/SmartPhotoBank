@@ -150,6 +150,12 @@ class LocalBd:
         self.closeConnection(connection)
 
 
+    def fromListToString(self,list):
+        str = list.split(',')
+        return str
+
+
+
 
 listt = "['Рома','Любовь']"
 Worker = LocalBd()
